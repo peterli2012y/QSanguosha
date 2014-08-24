@@ -39,7 +39,8 @@ public:
                 log.card_str = QString::number(id);
                 room->sendLog(log);
             }
-            room->obtainCard(player, id);
+            CardMoveReason reason(CardMoveReason::S_REASON_GIVE, dengai:objectName(), player:objectName(), objectName(), QString());
+            room->moveCardTo(Sanguosha->getCard(id), dengai, player, Player::PlaceHand, reason, false);
         }
         return false;
     }
