@@ -191,7 +191,8 @@ public:
 
                 const Card *card = room->askForCard(source, ".|heart|.|hand", "@enyuanheart", data, Card::MethodNone);
                 if (card)
-                    player->obtainCard(card);
+                    CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(), player->objectName(), objectName(), QString());
+                    room->moveCardTo(card, source, player, Player::PlaceHand, reason, true);
                 else
                     room->loseHp(source);
             }
@@ -622,7 +623,8 @@ public:
 
                 DummyCard *dummy = new DummyCard(pile_ids);
                 wangyi->setFlags("Global_GongxinOperator");
-                target->obtainCard(dummy, false);
+                CardMoveReason reason(CardMoveReason::S_REASON_GIVE, wangyi->objectName(), target:objectName(), objectName(), QString());
+                room->obtainCard(target, dummy, reason);
                 wangyi->setFlags("-Global_GongxinOperator");
                 delete dummy;
             }
@@ -645,7 +647,7 @@ void NosRendeCard::use(Room *room, ServerPlayer *source, QList<ServerPlayer *> &
 
     room->broadcastSkillInvoke("rende");
     CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(), target->objectName(), "nosrende", QString());
-    room->obtainCard(target, this, reason, false);
+    room->obtainCard(target, this, reason);
 
     int old_value = source->getMark("nosrende");
     int new_value = old_value + subcards.length();
