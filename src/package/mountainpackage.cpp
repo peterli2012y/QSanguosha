@@ -872,7 +872,8 @@ public:
             room->fillAG(cards, erzhang, cardsOther);
 
             int to_back = room->askForAG(erzhang, cardsToGet, false, "guzheng");
-            player->obtainCard(Sanguosha->getCard(to_back));
+            CardMoveReason reason(CardMoveReason::S_REASON_GIVE, erzhang->objectName(), player->objectName(), "haoshi", QString());
+            room->moveCardTo(Sanguosha->getCard(to_back), erzhang, player, Player::PlaceHand, reason, true);
 
             cards.removeOne(to_back);
 
