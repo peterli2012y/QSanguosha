@@ -288,7 +288,6 @@ public:
                     if (card) {
                         CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(),
                                               player->objectName(), objectName(), QString());
-                        reason.m_playerId = player->objectName();
                         room->moveCardTo(card, source, player, Player::PlaceHand, reason);
                     } else {
                         room->loseHp(source);
