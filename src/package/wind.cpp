@@ -97,7 +97,8 @@ void HuangtianCard::use(Room *room, ServerPlayer *source, QList<ServerPlayer *> 
         room->setPlayerFlag(zhangjiao, "HuangtianInvoked");
         room->broadcastSkillInvoke("huangtian");
         room->notifySkillInvoked(zhangjiao, "huangtian");
-        zhangjiao->obtainCard(this);
+        CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(), zhangjiao->objectName(), "huangtian", QString());
+        room->moveCardTo(this, source, zhangjiao, Player::PlaceHand, reason, true)
         QList<ServerPlayer *> zhangjiaos;
         QList<ServerPlayer *> players = room->getOtherPlayers(source);
         foreach (ServerPlayer *p, players) {
