@@ -401,7 +401,7 @@ bool HaoshiCard::targetFilter(const QList<const Player *> &targets, const Player
 void HaoshiCard::use(Room *room, ServerPlayer *source, QList<ServerPlayer *> &targets) const{
     CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(),
                           targets.first()->objectName(), "haoshi", QString());
-    room->moveCardTo(this, targets.first(), Player::PlaceHand, reason);
+    room->moveCardTo(this, source, targets.first(), Player::PlaceHand, reason);
 }
 
 class HaoshiViewAsSkill: public ViewAsSkill {
